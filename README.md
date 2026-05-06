@@ -23,96 +23,24 @@ This project provides a workaround: **dedicated screen flows for creating and ed
 
 ### Create Patient Flow
 
-```
-┌─────────────────────────┐
-│         START           │
-└────────────┬────────────┘
-             │
-             ▼
-┌─────────────────────────┐
-│  Get Patient Record     │
-│  Type (PersonAccount)   │
-│  ─────────────────────  │
-│  Query RecordType where │
-│  DeveloperName =        │
-│  'PersonAccount'        │
-└────────────┬────────────┘
-             │
-             ▼
-┌─────────────────────────┐
-│  Patient Information    │
-│  Screen                 │
-│  ─────────────────────  │
-│  • First Name *         │
-│  • Last Name *          │
-│  • Date of Birth        │
-│  • Phone                │
-│  • Email                │
-└────────────┬────────────┘
-             │
-             ▼
-┌─────────────────────────┐         ┌─────────────────────┐
-│  Create Patient Record  │──FAULT──▶│    Error Screen     │
-│  ─────────────────────  │         │  Shows error detail  │
-│  Account with           │         └─────────────────────┘
-│  RecordTypeId =         │
-│  PersonAccount          │
-└────────────┬────────────┘
-             │ SUCCESS
-             ▼
-┌─────────────────────────┐
-│  Confirmation Screen    │
-│  ─────────────────────  │
-│  "Patient created       │
-│   successfully!"        │
-└─────────────────────────┘
+```mermaid
+flowchart TD
+    A[Start] --> B[Get Patient Record Type]
+    B -->|Query RecordType<br/>DeveloperName = 'PersonAccount'| C[Patient Information Screen]
+    C -->|First Name, Last Name,<br/>DOB, Phone, Email| D[Create Patient Record]
+    D -->|Success| E[Navigate to Record]
+    D -->|Fault| F[Error Screen<br/>Shows error detail]
 ```
 
 ### Edit Patient Flow
 
-```
-┌─────────────────────────┐
-│     START (recordId)    │
-└────────────┬────────────┘
-             │
-             ▼
-┌─────────────────────────┐
-│  Get Patient Record     │
-│  ─────────────────────  │
-│  Query Account by       │
-│  recordId, retrieve:    │
-│  FirstName, LastName,   │
-│  PersonBirthdate,       │
-│  Phone, PersonEmail     │
-└────────────┬────────────┘
-             │
-             ▼
-┌─────────────────────────┐
-│  Edit Patient Screen    │
-│  ─────────────────────  │
-│  Pre-populated with     │
-│  current values:        │
-│  • First Name *         │
-│  • Last Name *          │
-│  • Date of Birth        │
-│  • Phone                │
-│  • Email                │
-└────────────┬────────────┘
-             │
-             ▼
-┌─────────────────────────┐         ┌─────────────────────┐
-│  Update Patient Record  │──FAULT──▶│    Error Screen     │
-│  ─────────────────────  │         │  Shows error detail  │
-│  Updates Account fields │         └─────────────────────┘
-└────────────┬────────────┘
-             │ SUCCESS
-             ▼
-┌─────────────────────────┐
-│  Confirmation Screen    │
-│  ─────────────────────  │
-│  "Patient updated       │
-│   successfully!"        │
-└─────────────────────────┘
+```mermaid
+flowchart TD
+    A[Start with recordId] --> B[Get Patient Record]
+    B -->|Query Account by ID<br/>Retrieve: FirstName, LastName,<br/>PersonBirthdate, Phone, PersonEmail| C[Edit Patient Screen]
+    C -->|Pre-populated fields:<br/>First Name, Last Name,<br/>DOB, Phone, Email| D[Update Patient Record]
+    D -->|Success| E[Confirmation Screen]
+    D -->|Fault| F[Error Screen<br/>Shows error detail]
 ```
 
 ## Deployment
