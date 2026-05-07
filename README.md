@@ -78,9 +78,7 @@ The standard "New" button on the Account list view launches a multi-entity creat
 
 #### If the page has no Highlights Panel
 
-Some record pages (especially Console layouts) may not have a Highlights Panel. You'll know this is the case if you don't see a standard header bar with action buttons at the top of the page:
-
-![Page without Highlights Panel](images/app_builder_no_highlights_panel.png)
+Some record pages (especially Console layouts) may not have a Highlights Panel. You'll know this is the case if you don't see a standard header bar with action buttons at the top of the page.
 
 To add one:
 
