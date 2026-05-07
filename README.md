@@ -4,9 +4,9 @@
 
 In Life Sciences Cloud, the standard Account "New" button is overridden by a **multi-entity create page** that automatically creates a HealthcareProvider record alongside the Account. Similarly, the standard Edit action uses a multi-entity edit page. This is by design for HCP (Healthcare Provider) workflows.
 
-However, **patients are not healthcare providers**. In orgs where AFLSCE (Agentforce for Life Sciences Commercial Edition) and other applications (e.g., Makana Patient Services, Health Cloud) need to co-exist, creating patients through the multi-entity flow is incorrect — it generates unnecessary HealthcareProvider records for patient accounts.
+However, **patients are not healthcare providers**. While separate orgs are recommended, in orgs where AFLSCE (Agentforce for Life Sciences Commercial Edition) and other applications (e.g., Patient Services, Health Cloud) need to co-exist, creating patients through the multi-entity flow is incorrect — it generates unnecessary HealthcareProvider records for patient accounts.
 
-This project provides a workaround: **dedicated screen flows for creating and editing Patient PersonAccount records** that bypass the multi-entity create/edit entirely. This allows patient management to coexist cleanly alongside HCP workflows in the same org.
+This project provides a Point of View (POV) on how to co-exist in the same org: **dedicated screen flows for creating and editing Patient PersonAccount records** that bypass the multi-entity create/edit entirely. This allows patient management to coexist cleanly alongside HCP workflows in the same org.
 
 ## Components
 
